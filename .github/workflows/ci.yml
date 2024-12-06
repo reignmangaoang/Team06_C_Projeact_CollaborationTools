@@ -1,0 +1,19 @@
+name: C Code CI/CD Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install GCC
+        run: sudo apt-get install build-essential
+      - name: Build code
+        run: gcc -o my_program main.c
+      - name: Run tests
+        run: ./test_program
