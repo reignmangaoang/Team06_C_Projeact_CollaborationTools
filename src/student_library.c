@@ -24,7 +24,7 @@ void addStudent() {
     printf("Enter Student ID: ");
     scanf("%d", &newStudent.id);
     printf("Enter Student Name: ");
-    scanf(" %[^]s", newStudent.name);
+    scanf(" %[^\n]s", newStudent.name);
     newStudent.grade = -1; // Grade not set yet
 
     students[studentCount++] = newStudent;
@@ -57,7 +57,7 @@ void updateStudentDetails() {
     for (int i = 0; i < studentCount; i++) {
         if (students[i].id == id) {
             printf("Enter new name for the student: ");
-            scanf(" %[^]s", students[i].name);
+            scanf(" %[^\n]s", students[i].name);
             printf("Student details updated successfully.\n");
             return;
         }
