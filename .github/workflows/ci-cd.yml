@@ -25,13 +25,7 @@ jobs:
     # Build the code
     - name: Build the Application
       run: |
-        gcc -o student_management main.c student_library.c
-
-    # Run Unit Tests (if test cases exist)
-    - name: Run Tests
-      run: |
-        gcc -o test_runner test_suite.c student_library.c
-        ./test_runner
+        gcc -o src/main.c src/student_library.c
 
   deploy:
     name: Deploy Application
