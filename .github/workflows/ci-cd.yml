@@ -25,7 +25,7 @@ jobs:
     # Build the code
     - name: Build the Application
       run: |
-        gcc -o src/main.c src/student_library.c
+        gcc -o student_management src/main.c src/student_library.c
 
   deploy:
     name: Deploy Application
