@@ -1,0 +1,44 @@
+name: C CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checkout the code
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    # Set up GCC (GNU Compiler Collection)
+    - name: Install GCC
+      run: sudo apt-get install -y build-essential
+
+    # Build the code
+    - name: Build the Application
+      run: |
+        gcc -o student_management main.c student_library.c
+
+    # Run Unit Tests (if test cases exist)
+    - name: Run Tests
+      run: |
+        gcc -o test_runner test_suite.c student_library.c
+        ./test_runner
+
+  deploy:
+    name: Deploy Application
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    # Simulated deployment step
+    - name: Deploy the Application
+      run: echo "Deploying application to the server!"
