@@ -26,8 +26,8 @@ void addStudent()
     Student newStudent;
     printf("Enter Student ID: ");
     scanf("%d", &newStudent.id);
-    // Bug 1: No duplicate ID check
-    // Bug 2: No input validation for negative IDs
+    // Bug 2: No duplicate ID check
+    // Bug 3: No input validation for negative IDs
     
     printf("Enter Student Name: ");
     scanf(" %[^\n]s", newStudent.name);
@@ -125,11 +125,28 @@ void setStudentGrade()
             printf("Enter grade for %s: ", students[i].name);
             scanf("%f", &grade);
             students[i].grade = grade;
-            // Bug 3: No validation for negative grades or unrealistic values
+            // Bug 4: No validation for negative grades or unrealistic values
             return;
         }
     }
     printf("Student with ID %d not found.\n", id);
 }
 
-// Bug 4: Incomplete function (removeStudent)
+// Bug 1: Incomplete function (removeStudent)
+/* void removeStudent() {
+    int id;
+    printf("Enter Student ID to remove: ");
+    scanf("%d", &id);
+
+    for (int i = 0; i < studentCount; i++) {
+        if (students[i].id == id) {
+            for (int j = i; j < studentCount - 1; j++) {
+                students[j] = students[j + 1];
+            }
+            studentCount--;
+            printf("Student removed successfully.\n");
+            return;
+        }
+    }
+    printf("Student with ID %d not found.\n", id);
+} */
