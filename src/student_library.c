@@ -26,6 +26,9 @@ void addStudent()
     Student newStudent;
     printf("Enter Student ID: ");
     scanf("%d", &newStudent.id);
+    // Bug 1: No duplicate ID check
+    // Bug 2: No input validation for negative IDs
+    
     printf("Enter Student Name: ");
     scanf(" %[^\n]s", newStudent.name);
     newStudent.grade = -1; // Grade not set yet
@@ -111,6 +114,7 @@ void viewStudentGrade()
 void setStudentGrade()
 {
     int id;
+    float grade;
     printf("Enter Student ID to set grade: ");
     scanf("%d", &id);
 
@@ -119,10 +123,13 @@ void setStudentGrade()
         if (students[i].id == id)
         {
             printf("Enter grade for %s: ", students[i].name);
-            scanf("%f", &students[i].grade);
-            printf("Grade set successfully.\n");
+            scanf("%f", &grade);
+            students[i].grade = grade;
+            // Bug 3: No validation for negative grades or unrealistic values
             return;
         }
     }
     printf("Student with ID %d not found.\n", id);
 }
+
+// Bug 4: Incomplete function (removeStudent)
