@@ -131,17 +131,30 @@ void setStudentGrade()
 {
     int id;
     float grade;
+
+    // Input Student ID
     printf("Enter Student ID to set grade: ");
-    scanf("%d", &id);
+    while (scanf("%d", &id) != 1 || id <= 0)
+    {
+        printf("Invalid ID. Please enter a positive integer: ");
+        while (getchar() != '\n')
+            ; // Clear input buffer
+    }
 
     for (int i = 0; i < studentCount; i++)
     {
         if (students[i].id == id)
         {
+            // Input Grade with validation
             printf("Enter grade for %s: ", students[i].name);
-            scanf("%f", &grade);
+            while (scanf("%f", &grade) != 1 || grade < 0 || grade > 100)
+            {
+                printf("Invalid grade. Enter a value between 0 and 100: ");
+                while (getchar() != '\n')
+                    ; // Clear input buffer
+            }
             students[i].grade = grade;
-            // Bug 4: No validation for negative grades or unrealistic values
+            printf("Grade updated successfully.\n");
             return;
         }
     }
