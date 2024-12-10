@@ -24,14 +24,30 @@ void addStudent()
     }
 
     Student newStudent;
+
+    // Input Student ID with validation
     printf("Enter Student ID: ");
-    scanf("%d", &newStudent.id);
-    // Bug 2: No duplicate ID check
-    // Bug 3: No input validation for negative IDs
-    
+    while (scanf("%d", &newStudent.id) != 1 || newStudent.id <= 0)
+    {
+        printf("Invalid ID. Please enter a positive integer: ");
+        while (getchar() != '\n')
+            ; // Clear input buffer
+    }
+
+    // Check for duplicate ID
+    for (int i = 0; i < studentCount; i++)
+    {
+        if (students[i].id == newStudent.id)
+        {
+            printf("Student ID already exists. Cannot add duplicate.\n");
+            return;
+        }
+    }
+
+    // Input Student Name
     printf("Enter Student Name: ");
     scanf(" %[^\n]s", newStudent.name);
-    newStudent.grade = -1; // Grade not set yet
+    newStudent.grade = -1; // Default grade
 
     students[studentCount++] = newStudent;
     printf("Student added successfully.\n");
@@ -132,15 +148,26 @@ void setStudentGrade()
     printf("Student with ID %d not found.\n", id);
 }
 
-// Bug 1: Incomplete function (removeStudent)
- void removeStudent() {
+void removeStudent()
+{
     int id;
-    printf("Enter Student ID to remove: ");
-    scanf("%d", &id);
 
-    for (int i = 0; i < studentCount; i++) {
-        if (students[i].id == id) {
-            for (int j = i; j < studentCount - 1; j++) {
+    // Input Student ID
+    printf("Enter Student ID to remove: ");
+    while (scanf("%d", &id) != 1 || id <= 0)
+    {
+        printf("Invalid ID. Please enter a positive integer: ");
+        while (getchar() != '\n')
+            ; // Clear input buffer
+    }
+
+    for (int i = 0; i < studentCount; i++)
+    {
+        if (students[i].id == id)
+        {
+            // Shift elements to remove student
+            for (int j = i; j < studentCount - 1; j++)
+            {
                 students[j] = students[j + 1];
             }
             studentCount--;
@@ -149,4 +176,4 @@ void setStudentGrade()
         }
     }
     printf("Student with ID %d not found.\n", id);
-} 
+}
