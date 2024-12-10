@@ -4,11 +4,13 @@
 
 #define MAX_STUDENTS 100
 #define NAME_LENGTH 50
+#define EMAIL_LENGTH 100
 
 typedef struct
 {
     int id;
     char name[NAME_LENGTH];
+    char email[EMAIL_LENGTH];
     float grade;
 } Student;
 
@@ -47,8 +49,21 @@ void addStudent()
     // Input Student Name
     printf("Enter Student Name: ");
     scanf(" %[^\n]s", newStudent.name);
+
+    // Input Student Email
+    printf("Enter Student Email: ");
+    scanf(" %[^\n]s", newStudent.email);
+
+    // Validate Email (simple check for '@')
+    if (strchr(newStudent.email, '@') == NULL)
+    {
+        printf("Invalid email format. Please try again.\n");
+        return;
+    }
+
     newStudent.grade = -1; // Default grade
 
+    // Add the student to the list
     students[studentCount++] = newStudent;
     printf("Student added successfully.\n");
 }
@@ -102,8 +117,9 @@ void listAllStudents()
     printf("List of All Students:\n");
     for (int i = 0; i < studentCount; i++)
     {
-        printf("ID: %d, Name: %s, Grade: %.2f\n",
+        printf("ID: %d, Name: %s, Email: %s, Grade: %.2f\n",
                students[i].id, students[i].name,
+               students[i].email,
                students[i].grade == -1 ? 0 : students[i].grade);
     }
 }
@@ -131,54 +147,34 @@ void setStudentGrade()
 {
     int id;
     float grade;
-
-    // Input Student ID
     printf("Enter Student ID to set grade: ");
-    while (scanf("%d", &id) != 1 || id <= 0)
-    {
-        printf("Invalid ID. Please enter a positive integer: ");
-        while (getchar() != '\n')
-            ; // Clear input buffer
-    }
+    scanf("%d", &id);
 
     for (int i = 0; i < studentCount; i++)
     {
         if (students[i].id == id)
         {
-            // Input Grade with validation
             printf("Enter grade for %s: ", students[i].name);
-            while (scanf("%f", &grade) != 1 || grade < 0 || grade > 100)
-            {
-                printf("Invalid grade. Enter a value between 0 and 100: ");
-                while (getchar() != '\n')
-                    ; // Clear input buffer
-            }
+            scanf("%f", &grade);
             students[i].grade = grade;
-            printf("Grade updated successfully.\n");
+            // Bug 4: No validation for negative grades or unrealistic values
             return;
         }
     }
     printf("Student with ID %d not found.\n", id);
 }
 
+// Bug 1: Incomplete function (removeStudent)
 void removeStudent()
 {
     int id;
-
-    // Input Student ID
     printf("Enter Student ID to remove: ");
-    while (scanf("%d", &id) != 1 || id <= 0)
-    {
-        printf("Invalid ID. Please enter a positive integer: ");
-        while (getchar() != '\n')
-            ; // Clear input buffer
-    }
+    scanf("%d", &id);
 
     for (int i = 0; i < studentCount; i++)
     {
         if (students[i].id == id)
         {
-            // Shift elements to remove student
             for (int j = i; j < studentCount - 1; j++)
             {
                 students[j] = students[j + 1];
