@@ -133,7 +133,7 @@ void setStudentGrade()
 }
 
 // Bug 1: Incomplete function (removeStudent)
-/* void removeStudent() {
+ void removeStudent() {
     int id;
     printf("Enter Student ID to remove: ");
     scanf("%d", &id);
@@ -149,4 +149,4 @@ void setStudentGrade()
         }
     }
     printf("Student with ID %d not found.\n", id);
-} */
+} 
