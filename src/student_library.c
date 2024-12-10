@@ -1,24 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 #define MAX_STUDENTS 100
 #define NAME_LENGTH 50
 
-typedef struct
-{
+typedef struct {
     int id;
     char name[NAME_LENGTH];
-    float grade;
+    char email[100];  // New field added
 } Student;
 
 Student students[MAX_STUDENTS];
 int studentCount = 0;
 
-void addStudent()
-{
-    if (studentCount >= MAX_STUDENTS)
-    {
+void addStudent() {
+    if (studentCount >= MAX_STUDENTS) {
         printf("Cannot add more students. The list is full.\n");
         return;
     }
@@ -26,16 +22,18 @@ void addStudent()
     Student newStudent;
     printf("Enter Student ID: ");
     scanf("%d", &newStudent.id);
-    // Bug 2: No duplicate ID check
-    // Bug 3: No input validation for negative IDs
     
     printf("Enter Student Name: ");
     scanf(" %[^\n]s", newStudent.name);
-    newStudent.grade = -1; // Grade not set yet
+    
+    printf("Enter Student Email: ");
+    scanf(" %[^\n]s", newStudent.email);  // Adding email input
 
     students[studentCount++] = newStudent;
     printf("Student added successfully.\n");
 }
+
+
 
 void updateStudentDetails()
 {
